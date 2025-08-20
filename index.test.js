@@ -59,4 +59,17 @@ describe('Endpoints', () => {
         });
     });
 
+    describe('DELETE /dogs/:id', () => {
+        it('should delete dog by id', async () => {
+            // make a request
+            const response = await request(app).delete('/dogs/1');
+            // assert a response code
+            expect(response.status).toBe(200);
+            // expect a response
+            expect(response.body).toBeDefined();
+            
+            const fetchedDog = await Dog.findAll({where: {id: 1}})
+            expect(fetchedDog).toEqual([])
+        });
+    });
 });
